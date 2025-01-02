@@ -7,6 +7,7 @@ export const Pokemon =() =>{
 const [pokemon, setPokemon]= useState([]);
 const [loading, setloading]= useState(true);
 const [error, setError]= useState(null);
+const [search, setSearch]= useState("");
 
     const API=" https://pokeapi.co/api/v2/pokemon?limit=124";
 
@@ -40,6 +41,12 @@ useEffect(()=>{
     fetchPokemon();
 },[]);
 
+
+const searchData = pokemon.filter((curPokemon)=>{
+ console.log (curPokemon.name.toLowerCase().includes(search.toLowerCase()))
+});
+
+
 if(loading){
     return (<div>
         <h1>
@@ -56,6 +63,12 @@ if(loading){
        LETS CATCH POKEMON
     </h1>
         </header>
+        <div className="pokemon-search">
+            <input type="text" placeholder="search pokemon" value={search} onChange={(e)=>
+                {
+                    setSearch(e.target.value)
+                }}/>
+        </div>
         <div>
             <ul className="cards">
                 {
